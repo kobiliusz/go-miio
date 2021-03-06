@@ -107,7 +107,7 @@ func NewVacuum(deviceIP, token string) (*Vacuum, error) {
 		},
 	}
 
-	err := v.start(deviceIP, token, defaultPort)
+	err := v.Start(deviceIP, token, DefaultPort)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func NewVacuum(deviceIP, token string) (*Vacuum, error) {
 
 // Stop stops the device.
 func (v *Vacuum) Stop() {
-	v.stop()
+	v.Stop()
 	close(v.UpdateChan)
 }
 
@@ -209,12 +209,12 @@ func (v *Vacuum) UpdateState() {
 
 // UpdateStatus requests for a state update.
 func (v *Vacuum) UpdateStatus() bool {
-	return v.sendCommand(cmdGetStatus, nil, true, vacRetries)
+	return v.SendCommand(cmdGetStatus, nil, true, vacRetries)
 }
 
 // StartCleaning starts the cleaning cycle.
 func (v *Vacuum) StartCleaning() bool {
-	if !v.sendCommand(cmdStart, nil, false, vacRetries) {
+	if !v.SendCommand(cmdStart, nil, false, vacRetries) {
 		return false
 	}
 
