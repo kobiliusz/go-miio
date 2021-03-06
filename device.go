@@ -49,7 +49,7 @@ func (d *XiaomiDevice) SetRawState(state map[string]interface{}) {
 }
 
 // Starts listeners.
-func (d *XiaomiDevice) start(deviceIP, token string, port int) error {
+func (d *XiaomiDevice) Start(deviceIP, token string, port int) error {
 	c, err := newConnection(deviceIP, port)
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func (d *XiaomiDevice) start(deviceIP, token string, port int) error {
 }
 
 // Stops listeners.
-func (d *XiaomiDevice) stop() {
+func (d *XiaomiDevice) Stop() {
 	if nil != d.conn {
 		close(d.messages)
 		d.conn.Close()
@@ -176,7 +176,7 @@ func (d *XiaomiDevice) GetFieldValueBool(field fldName, curVal bool) bool {
 }
 
 // Sends the command to a device. Will try to retry.
-func (d *XiaomiDevice) sendCommand(cmd string, data []interface{}, storeResponse bool, retries int) bool {
+func (d *XiaomiDevice) SendCommand(cmd string, data []interface{}, storeResponse bool, retries int) bool {
 	resp := false
 	for ii := 0; ii < retries; ii++ {
 		resp = d.doCommand(cmd, data, storeResponse)
