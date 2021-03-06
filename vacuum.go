@@ -224,7 +224,7 @@ func (v *Vacuum) StartCleaning() bool {
 
 // PauseCleaning pauses the cleaning cycle.
 func (v *Vacuum) PauseCleaning() bool {
-	if !v.sendCommand(cmdPause, nil, false, vacRetries) {
+	if !v.SendCommand(cmdPause, nil, false, vacRetries) {
 		return false
 	}
 
@@ -234,7 +234,7 @@ func (v *Vacuum) PauseCleaning() bool {
 
 // StopCleaning stops the cleaning cycle.
 func (v *Vacuum) StopCleaning() bool {
-	if !v.sendCommand(cmdStop, nil, false, vacRetries) {
+	if !v.SendCommand(cmdStop, nil, false, vacRetries) {
 		return false
 	}
 
@@ -244,12 +244,12 @@ func (v *Vacuum) StopCleaning() bool {
 
 // StopCleaningAndDock stops the cleaning cycle and returns to dock.
 func (v *Vacuum) StopCleaningAndDock() bool {
-	if !v.sendCommand(cmdStop, nil, false, vacRetries) {
+	if !v.SendCommand(cmdStop, nil, false, vacRetries) {
 		return false
 	}
 
 	time.Sleep(1 * time.Second)
-	if !v.sendCommand(cmdDock, nil, false, vacRetries) {
+	if !v.SendCommand(cmdDock, nil, false, vacRetries) {
 		return false
 	}
 
@@ -259,7 +259,7 @@ func (v *Vacuum) StopCleaningAndDock() bool {
 
 // FindMe sends the find me command.
 func (v *Vacuum) FindMe() bool {
-	if !v.sendCommand(cmdFindMe, nil, false, vacRetries) {
+	if !v.SendCommand(cmdFindMe, nil, false, vacRetries) {
 		return false
 	}
 
