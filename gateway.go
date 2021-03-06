@@ -60,21 +60,21 @@ func NewGateway(deviceIP, aesKey string) (*Gateway, error) {
 		aesKey:     []byte(aesKey),
 	}
 
-	err := g.start(deviceIP, "", gatewayPort)
+	err := g.Start(deviceIP, "", gatewayPort)
 	if err != nil {
-		g.stop()
+		g.Stop()
 		return nil, err
 	}
 
 	err = g.getDevices()
 	if err != nil {
-		g.stop()
+		g.Stop()
 		return nil, err
 	}
 
 	err = g.startMultiCast()
 	if err != nil {
-		g.stop()
+		g.Stop()
 		return nil, err
 	}
 
@@ -158,7 +158,7 @@ func (g *Gateway) Stop() {
 	if nil != g.multiCast {
 		g.multiCast.Close()
 	}
-	g.stop()
+	g.Stop()
 	close(g.UpdateChan)
 }
 
