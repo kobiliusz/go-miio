@@ -272,7 +272,7 @@ func (v *Vacuum) SetFanPower(val uint8) bool {
 	if val > 100 {
 		val = 100
 	}
-	if !v.sendCommand(cmdFanPower, []interface{}{val}, false, vacRetries) {
+	if !v.SendCommand(cmdFanPower, []interface{}{val}, false, vacRetries) {
 		return false
 	}
 
