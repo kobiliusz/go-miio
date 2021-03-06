@@ -16,7 +16,7 @@ import (
 
 const (
 	// Default device port.
-	defaultPort = 54321
+	DefaultPort = 54321
 )
 
 // IDevice defines Xiaomi device.
